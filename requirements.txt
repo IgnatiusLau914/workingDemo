@@ -1,0 +1,9 @@
+conda create -n HLHGATs python=3.9 -y
+conda activate HLHGATs
+conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 cpuonly -c pytorch -y
+
+pip install torch_scatter torch_sparse torch_cluster torch_spline_conv -f https://data.pyg.org/whl/torch-2.0.1+cpu.html
+pip install torch-geometric -f https://data.pyg.org/whl/torch-2.0.1+cpu.html
+
+conda install -c conda-forge timm torchmetrics mat73 network matplotlib -y
+conda clean --all
