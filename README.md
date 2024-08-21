@@ -31,7 +31,7 @@ conda clean --all
 ```
 
 ## file descriptions
-./OHBM-DEMO:  Step-by-Step Guide for Implementing the HL-HGAT Model.
+./HLHGAT-DEMO:  Step-by-Step Guide for Implementing the HL-HGAT Model.
 
 
 ## Citation
