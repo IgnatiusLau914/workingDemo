@@ -231,21 +231,20 @@ def MLGC_Weight(data, keig=1, seed=10086):
                 ei1[1].append(imax)
 
     ei1 = torch.tensor(ei1)
-    # if the coarsened graph is too dense,
-    # remove edges with only one connection between
-    # node clusters
-    edge_indices, edge_cluster = torch.unique(c_edge[~torch.isinf(c_edge)],return_counts=True)
-    edge_remaining_indices = torch.nonzero(edge_cluster!=1).view(-1)
-    ei1 = ei1[:,edge_cluster!=1]
-    for i,v in enumerate(c_edge):
-        if v in edge_indices[edge_cluster==1]:
-            c_edge[i] = torch.inf
-        elif ~torch.isinf(v):
-#             print(edge_remaining_indices)
-            c_edge[i] = torch.nonzero(edge_remaining_indices==v)[0]  
+    ### if the coarsened graph is too dense,
+    ### remove edges with only one connection between
+    ### node clusters
+    # edge_indices, edge_cluster = torch.unique(c_edge[~torch.isinf(c_edge)],return_counts=True)
+    # edge_remaining_indices = torch.nonzero(edge_cluster!=1).view(-1)
+    # ei1 = ei1[:,edge_cluster!=1]
+    # for i,v in enumerate(c_edge):
+    #     if v in edge_indices[edge_cluster==1]:
+    #         c_edge[i] = torch.inf
+    #     elif ~torch.isinf(v):
+    #         c_edge[i] = torch.nonzero(edge_remaining_indices==v)[0]  
     
 #     c_node = torch.tensor(c_node).to(torch.float)
-    # remove isolated nodes
+    ### remove isolated nodes
     ei1, _,mask = remove_isolated_nodes(ei1, num_nodes=c_unique.shape[0])
     c_node = torch.tensor(c_node).to(torch.float)
     out_nodes = torch.arange(c_unique.shape[0])[~mask]
